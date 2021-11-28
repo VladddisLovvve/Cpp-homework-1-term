@@ -24,14 +24,14 @@ public:
 	~Fractions();
 
 	int get_numerator() { return m_numerator; }
-	int get_dedominator() { return m_denominator; }
+	int get_denominator() { return m_denominator; }
 
 	void reduction();
 
 	operator double();
 
-	friend std::ostream& operator<< (std::ostream& stream, const Fractions& fraction); /* перегрузку ввода и вывода реализуем через дружественные функции, т.к. левый операнд не является эземпляром класса Fractions*/
-	friend std::istream& operator>> (std::istream& stream, Fractions& fraction);
+	friend std::ostream& operator<< (std::ostream& out, const Fractions& fraction); /* перегрузку ввода и вывода реализуем через дружественные функции, т.к. левый операнд не является эземпляром класса Fractions*/
+	friend std::istream& operator>> (std::istream& in, Fractions& fraction);
 
 	Fractions& operator+= (const Fractions& other); /*левый операнд изменяется, используем перегрузку через методы класса*/
 	Fractions& operator-= (const Fractions& other);
@@ -51,7 +51,7 @@ public:
 	friend bool operator<=(const Fractions& lhs, const Fractions& rhs);
 };
 
-Fractions operator+ (const Fractions& lhs, const Fractions& rhs); /*левый операнд не изменяется, используем перегрузку через дружественные функции*/
+Fractions operator+ (const Fractions& lhs, const Fractions& rhs); /*левый операнд не изменяется, используем перегрузку через (не)дружественные функции*/
 Fractions operator- (const Fractions& lhs, const Fractions& rhs);
 Fractions operator* (const Fractions& lhs, const Fractions& rhs);
 Fractions operator/(const Fractions& lhs, const Fractions& rhs);
