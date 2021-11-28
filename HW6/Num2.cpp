@@ -36,7 +36,6 @@ std::istream& operator>> (std::istream& in, Fractions& fraction)
 
 Fractions& Fractions::operator+= (const Fractions& other)
 {
-	unsigned temp = m_denominator;
 	m_numerator = m_numerator * other.m_denominator + other.m_numerator * m_denominator;
 	m_denominator *= other.m_denominator;
 	
