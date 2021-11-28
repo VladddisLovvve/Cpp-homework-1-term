@@ -3,7 +3,7 @@
 
 void Fractions::reduction()
 {
-	int temp = std::gcd(3, 12);
+	int temp = std::gcd(m_numerator, m_denominator);
 	m_numerator /= temp;
 	m_denominator /= temp;
 }
