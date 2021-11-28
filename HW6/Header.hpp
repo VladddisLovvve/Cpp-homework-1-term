@@ -38,11 +38,6 @@ public:
 	Fractions& operator*= (const Fractions& other);
 	Fractions& operator/= (const Fractions& other);
 
-	friend Fractions operator+(const Fractions& lhs, const Fractions& rhs); /*левый операнд не изменяется, используем перегрузку через дружественные функции*/
-	friend Fractions operator-(const Fractions& lhs, const Fractions& rhs);
-	friend Fractions operator*(const Fractions& lhs, const Fractions& rhs);
-	friend Fractions operator/(const Fractions& lhs, const Fractions& rhs);
-
 	Fractions& operator++(); /*версии префикс*/
 	Fractions& operator--();
 	Fractions operator++(int); /*фиктивная переменная, версии постфикс*/
@@ -56,3 +51,7 @@ public:
 	friend bool operator<=(const Fractions& lhs, const Fractions& rhs);
 };
 
+Fractions operator+ (const Fractions& lhs, const Fractions& rhs); /*левый операнд не изменяется, используем перегрузку через дружественные функции*/
+Fractions operator- (const Fractions& lhs, const Fractions& rhs);
+Fractions operator* (const Fractions& lhs, const Fractions& rhs);
+Fractions operator/(const Fractions& lhs, const Fractions& rhs);
