@@ -44,22 +44,22 @@ public:
 	
 };
 
-Example::Example() : m_length(0), m_data(nullptr), m_vector({}) {}
+Example::Example() : m_length(0), m_data(nullptr), m_vector() {}
 
-Example::Example(int x) : m_length(1), m_vector({})
+Example::Example(int x) : m_length(1), m_vector()
 {
 	m_data = new int[1];
 	m_data[0] = x;
 }
 
-Example::Example(const int* data) : m_length(1), m_vector({})
+Example::Example(const int* data) : m_length(1), m_vector()
 {
 	m_data = new int[1];
 	m_data[0] = data[0];
 }
 
 Example::Example(const int* data, unsigned length) : 
-	m_length(length), m_vector({})
+	m_length(length), m_vector()
 {
 	m_data = new int[length];
 	for (auto i = 0U; i <= length; i++)
@@ -103,6 +103,8 @@ Example& Example::operator=(const Example& other)
 
 Example& Example::operator=(Example&& other)
 {
+	if (&other == this)
+		return *this;
 	m_vector = std::move(other.m_vector);
 	m_length = other.m_length;
 	m_data = other.m_data;
@@ -121,10 +123,8 @@ Example::Example(const Example& other) : m_length(other.m_length), m_vector(othe
 }
 
 
-Example::Example(Example&& other) : m_length(other.m_length), m_data(other.m_data)
+Example::Example(Example&& other) : m_length(other.m_length), m_data(other.m_data), m_vector(std::move(other.m_vector))
 {
-	m_vector = std::move(other.m_vector);
-
 	other.m_data = nullptr;
 	other.m_length = 0U;
 }
