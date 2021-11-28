@@ -118,82 +118,60 @@ Fractions operator/ (const Fractions& lhs, const Fractions& rhs)
 
 Fractions& Fractions::operator++ () /*префикс*/
 {
-	(*this).m_numerator += m_denominator;
+	m_numerator += m_denominator;
 
-	(*this).reduction();
 	return *this;
 }
 
 Fractions& Fractions::operator-- ()
 {
-	(*this).m_numerator -= m_denominator;
+	m_numerator -= m_denominator;
 
-	(*this).reduction();
 	return *this;
 }
 
 Fractions Fractions::operator++ (int) /*постфикс*/
 {
 	Fractions tmp = *this;
-	(*this).m_numerator += m_denominator;
+	m_numerator += m_denominator;
 
-	(*this).reduction();
 	return tmp;
 }
 
 Fractions Fractions::operator-- (int)
 {
 	Fractions tmp = *this;
-	(*this).m_numerator -= m_denominator;
+	m_numerator -= m_denominator;
 
-	(*this).reduction();
 	return tmp;
 }
 
 bool operator== (const Fractions& lhs, const Fractions& rhs)
 {
-	if ((lhs - rhs).m_numerator != 0)
-		return false;
-	else
-		return true;
+	return(((lhs - rhs).m_numerator == 0))
 }
 
 bool operator!= (const Fractions& lhs, const Fractions& rhs)
 {
-	if ((lhs - rhs).m_numerator == 0)
-		return false;
-	else
-		return true;
+	return(((lhs - rhs).m_numerator != 0))
 }
 
 bool operator> (const Fractions& lhs, const Fractions& rhs)
 {
-	if ((lhs - rhs).m_numerator > 0)
-		return true;
-	else
-		return false;
+	return(((lhs - rhs).m_numerator > 0))
 }
 
 bool operator>= (const Fractions& lhs, const Fractions& rhs)
 {
-	if ((lhs - rhs).m_numerator >= 0)
-		return true;
-	else
-		return false;
+	return(((lhs - rhs).m_numerator >= 0))
 }
 
 bool operator< (const Fractions& lhs, const Fractions& rhs)
 {
-	if ((lhs - rhs).m_numerator < 0)
-		return true;
-	else
-		return false;
+	return(((lhs - rhs).m_numerator < 0))
 }
 
 bool operator<= (const Fractions& lhs, const Fractions& rhs)
 {
-	if ((lhs - rhs).m_numerator <= 0)
-		return true;
-	else
-		return false;
+	return(((lhs - rhs).m_numerator <= 0))
 }
