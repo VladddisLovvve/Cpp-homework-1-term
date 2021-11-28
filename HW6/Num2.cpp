@@ -8,10 +8,7 @@ void Fractions::reduction()
 	m_denominator /= temp;
 }
 
-double Fractions::converting()
-{
-	return(m_numerator / m_denominator);
-}
+Fractions::operator double() { return double(m_numerator) / m_denominator; }
 
 std::ostream& operator<< (std::ostream& out, const Fractions& fraction)
 {
@@ -38,14 +35,14 @@ Fractions& Fractions::operator+= (const Fractions& other)
 {
 	m_numerator = m_numerator * other.m_denominator + other.m_numerator * m_denominator;
 	m_denominator *= other.m_denominator;
-	
+
 	(*this).reduction();
 	return (*this);
 }
 Fractions& Fractions::operator-= (const Fractions& other)
 {
 	m_numerator = m_numerator * other.m_denominator - other.m_numerator * m_denominator;
-	m_denominator *= other.m_denominator;	
+	m_denominator *= other.m_denominator;
 
 	(*this).reduction();
 	return *this;
@@ -69,51 +66,68 @@ Fractions& Fractions::operator/= (const Fractions& other)
 	m_numerator *= other.m_denominator;
 	m_denominator *= other.m_numerator;
 
+	if (m_denominator < 0)
+	{	
+		m_denominator *= -1;
+		m_numerator *= -1;	
+	}
+
 	(*this).reduction();
 	return *this;
 }
 
+//Fractions operator+ (const Fractions& lhs, const Fractions& rhs)
+//{
+//	Fractions summ;
+//	summ.m_numerator = lhs.m_numerator * rhs.m_denominator + rhs.m_numerator * lhs.m_denominator;
+//	summ.m_denominator = lhs.m_denominator * rhs.m_denominator;
+//
+//	summ.reduction();
+//	return summ;
+//}
+
 Fractions operator+ (const Fractions& lhs, const Fractions& rhs)
 {
-	Fractions summ;
-	summ.m_numerator = lhs.m_numerator * rhs.m_denominator + rhs.m_numerator * lhs.m_denominator;
-	summ.m_denominator = lhs.m_denominator * rhs.m_denominator;
-
-	summ.reduction();
-	return summ;
+	Fractions tmp = lhs;
+	return Fractions(tmp += rhs);
 }
+
 Fractions operator- (const Fractions& lhs, const Fractions& rhs)
 {
-	Fractions diff;
-	diff.m_numerator = lhs.m_numerator * rhs.m_denominator - rhs.m_numerator * lhs.m_denominator;
-	diff.m_denominator = lhs.m_denominator * rhs.m_denominator;
-	
-	diff.reduction();
-	return diff;
+	Fractions tmp = lhs;
+	return Fractions(tmp -= rhs);
 }
 Fractions operator* (const Fractions& lhs, const Fractions& rhs)
 {
-	Fractions mult;
-	mult.m_numerator = lhs.m_numerator * rhs.m_numerator;
-	mult.m_denominator = lhs.m_denominator * rhs.m_denominator;
-
-	mult.reduction();
-	return mult;
+	Fractions tmp = lhs;
+	return Fractions(tmp *= rhs);
 }
+//Fractions operator/ (const Fractions& lhs, const Fractions& rhs)
+//{
+//	if (rhs.m_denominator == 0)
+//	{
+//		std::cerr << "Division by zero is unacceptable.";
+//		return lhs;
+//	}
+//
+//	Fractions tmp = lhs;
+//	div.m_numerator = lhs.m_numerator * rhs.m_denominator;
+//	div.m_denominator = lhs.m_denominator * rhs.m_numerator;
+//
+//	if (div.m_denominator < 0)
+//	{
+//		div.m_denominator *= -1;
+//		div.m_numerator *= -1;
+//	}
+//
+//	div.reduction();
+//	return div;
+//}
+
 Fractions operator/ (const Fractions& lhs, const Fractions& rhs)
 {
-	if (rhs.m_denominator == 0)
-	{
-		std::cerr << "Division by zero is unacceptable.";
-		return lhs;
-	}
-
-	Fractions div;
-	div.m_numerator = lhs.m_numerator * rhs.m_denominator;
-	div.m_denominator = lhs.m_denominator * rhs.m_numerator;
-
-	div.reduction();
-	return div;
+	Fractions tmp = lhs;
+	return Fractions(tmp /= rhs);
 }
 
 Fractions& Fractions::operator++ () /*префикс*/
@@ -148,30 +162,30 @@ Fractions Fractions::operator-- (int)
 
 bool operator== (const Fractions& lhs, const Fractions& rhs)
 {
-	return(((lhs - rhs).m_numerator == 0))
+	return(((lhs - rhs).m_numerator == 0));
 }
 
 bool operator!= (const Fractions& lhs, const Fractions& rhs)
 {
-	return(((lhs - rhs).m_numerator != 0))
+	return(((lhs - rhs).m_numerator != 0));
 }
 
 bool operator> (const Fractions& lhs, const Fractions& rhs)
 {
-	return(((lhs - rhs).m_numerator > 0))
+	return(((lhs - rhs).m_numerator > 0));
 }
 
 bool operator>= (const Fractions& lhs, const Fractions& rhs)
 {
-	return(((lhs - rhs).m_numerator >= 0))
+	return(((lhs - rhs).m_numerator >= 0));
 }
 
 bool operator< (const Fractions& lhs, const Fractions& rhs)
 {
-	return(((lhs - rhs).m_numerator < 0))
+	return(((lhs - rhs).m_numerator < 0));
 }
 
 bool operator<= (const Fractions& lhs, const Fractions& rhs)
 {
-	return(((lhs - rhs).m_numerator <= 0))
+	return(((lhs - rhs).m_numerator <= 0));
 }
