@@ -1,9 +1,9 @@
 #include <iostream>
 
 template <typename F, typename ... A>
-void call(F function, A  ... args)
+ call(F function, A  ... args)
 {
-	function(static_cast<A&&>(args)...);
+	function(args...);
 }
 
 void print(int x, double y)
