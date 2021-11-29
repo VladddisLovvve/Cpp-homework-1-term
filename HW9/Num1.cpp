@@ -10,12 +10,11 @@ void quick_sort(T* arr, int left, int right, F compare)
 
 	int k = left;
 
-	for (auto i = left; i < right; i++)
+	for (auto i = left; i <= right; ++i)
 	{
 		if compare(arr[i], arr[right])
 		{
-			std::swap(arr[i], arr[k]);
-			k++;
+			std::swap(arr[i], arr[k++]);
 		}
 	}
 	std::swap(arr[k], arr[right]);
