@@ -1,5 +1,17 @@
 #include "Header.hpp"
 
+Fractions::Fractions(int num, int den = 1) : m_numerator(num), m_denominator(den)
+{
+	if (den == 0)
+	{
+		throw Error_zero_denominator();
+	}
+	if (den < 0)
+	{
+		num *= -1;
+		den *= -1;
+	}
+}
 
 void Fractions::reduction()
 {
@@ -24,7 +36,12 @@ std::istream& operator>> (std::istream& in, Fractions& fraction)
 	if (fraction.m_denominator == 0)
 	{
 		fraction.m_denominator = 1;
-		std::cerr << "Division by zero is unacceptable. Your denominator was transformed into 1.";
+		throw Error_zero_denominator();
+	}
+	if (fraction.m_denominator < 0)
+	{
+		fraction.m_numerator *= -1;
+		fraction.m_denominator *= -1;
 	}
 
 	fraction.reduction();
@@ -187,10 +204,10 @@ bool operator<= (const Fractions& lhs, const Fractions& rhs)
 	return(((lhs - rhs).m_numerator <= 0));
 }
 
-//try
-//{
-//
-//}
+////try
+////{
+////
+////}
 //int main()
 //{
 //	try
