@@ -21,17 +21,12 @@ private:
 public:
 	//Fractions() : m_numerator(0), m_denominator(1) {}
 
-	Fractions(int num, int den = 1) : m_numerator(num), m_denominator(den) 
-	{
-		if (den == 0)
-		{
-			throw Error_zero_denominator();
-		}
-	}
+	Fractions(int num, int den = 1);
+	
+	~Fractions();
 
 	Fractions(const Fractions&) = default;
 
-	~Fractions();
 
 	int get_numerator() { return m_numerator; }
 	int get_denominator() { return m_denominator; }
