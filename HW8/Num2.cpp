@@ -5,7 +5,7 @@
 #include <string>
 
 
-double square_root(const double& x)
+double square_root(double x)
 {
 	if (x < 0) throw std::domain_error("Value less than zero.");
 	return pow(x, 0.5);
@@ -19,15 +19,22 @@ std::string my_time(int h, int m)
 }
 
 
-void print_vector(const std::vector <int> &vector, int length)
+void print_vector_element(const std::vector <int> &vector, unsigned pos)
 {
-	if (length != vector.size()) throw std::length_error("Length of vector isn't correct\n");
-	for (auto i = 0U; i < length; i++)
-	{
-		std::cout << "Element number " << i << " is " << vector[i] << std::endl;
-	}
+	if (pos != vector.size()) throw std::length_error("Length of vector isn't correct\n");
+	std::cout << vector[pos] << std::endl;
 }
 
+void are_you_a_human(bool flag)
+{
+	if (flag != true) throw std::logic_error("WTF, who are you?!");
+}
+
+void change_char_in_string(std::string &str, char c, unsigned pos)
+{
+	if (pos > str.length()) throw std::out_of_range("Position isn't within the string");
+	str.at(pos) = c;
+}
 
 
 void time_runs(const double& start_time, const double& end_time)
@@ -56,11 +63,21 @@ int main()
 		std::cout << my_time(h, m) << std::endl;
 
 		std::vector <int> v = { 1, 0, 2, 1 };
-		unsigned l;
-		std::cout << "Enter vector { 1, 0, 2, 1 } length" << std::endl;
-		std::cin >> l;
-		print_vector(v, l);
-		std::cout << std::endl;
+		unsigned pos;
+		std::cout << "Enter the position" << std::endl;
+		std::cin >> pos;
+		print_vector_element(v, pos);
+		
+		bool flag;
+		std::cout << "Are you a human? Print true or false";
+		std::cin >> flag;
+		are_you_a_human(flag);
+
+		std::string str = "abcdefg";
+		unsigned pos2;
+		std::cout << "Enter the position";
+		std::cin >> pos2;
+		change_char_in_string(str, pos2);
 
 		time_runs(1, 1e8);
 	}
@@ -76,6 +93,16 @@ int main()
 		terminate();
 	}
 	catch (std::length_error& e)
+	{
+		std::cerr << e.what() << std::endl;
+		terminate();
+	}
+	catch (std::out_of_range& e)
+	{
+		std::cerr << e.what() << std::endl;
+		terminate();
+	}
+	catch (std::logic_error& e)
 	{
 		std::cerr << e.what() << std::endl;
 		terminate();
