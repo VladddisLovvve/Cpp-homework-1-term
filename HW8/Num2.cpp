@@ -30,7 +30,7 @@ void print_vector(const std::vector <int> &vector, int length)
 
 
 
-void time_runns(const double& start_time, const double& end_time)
+void time_runs(const double& start_time, const double& end_time)
 {
 	double time = start_time;
 	while (time < end_time)
@@ -62,7 +62,7 @@ int main()
 		print_vector(v, l);
 		std::cout << std::endl;
 
-		time_runns(1, 1e8);
+		time_runs(1, 1e8);
 	}
 
 	catch (std::domain_error& e)
