@@ -14,3 +14,6 @@ struct Fib < 1 >
 template < >
 struct Fib < 2 >
 { static const int value = 1; };
+
+template < int n > 
+int Fib_v = Fib < n > ::value;
