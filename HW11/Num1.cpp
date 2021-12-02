@@ -3,7 +3,7 @@
 
 
 template < typename RT, typename ... A >
-struct is_function  : std::false_type {};
+struct is_function : std::false_type {};
 
 template < typename RT, typename ... A >
 struct is_function < RT(A...) > : std::true_type {};
@@ -12,14 +12,14 @@ template < typename RT, typename ... A >
 struct is_function < const RT(A...) > : std::true_type {};
 
 template < typename RT, typename ... A >
-struct is_function < RT(A...) & > : std::true_type {};
+struct is_function < RT(A...)& > : std::true_type {};
 
 template < typename RT, typename ... A >
-struct is_function < RT(A...) && > : std::true_type {};
+struct is_function < RT(A...)&& > : std::true_type {};
 
 
-template < typename RT, typename ... A >
-using is_function_v = typename is_function < RT(A...) > ::value
+template < typename RT>
+bool is_function_v = is_function < RT > ::value;
 
 
 
