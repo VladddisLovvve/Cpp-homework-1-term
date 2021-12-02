@@ -18,8 +18,8 @@ template < typename RT, typename ... A >
 struct is_function < RT(A...)&& > : std::true_type {};
 
 
-template < typename RT>
-bool is_function_v = is_function < RT > ::value;
+template < typename RT, typename ... A >
+inline constexpr bool is_function_v = is_function < RT, typename ... A > ::value; // почему это не работает с typename ... A???? Без него код компилируется
 
 
 
