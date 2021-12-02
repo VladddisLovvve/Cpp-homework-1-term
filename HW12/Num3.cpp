@@ -1,6 +1,6 @@
 #include <iostream>
 
-constexpr double E(unsigned s) // s - относительная погрешность измерения s в процентах
+constexpr double E(unsigned s) // s - относительная погрешность измерения s в процентах (определяет, сколько членов из ряда будет рассмотрено)
 {
 	double ans = 0; 
 	unsigned k = 1, j = 0;
