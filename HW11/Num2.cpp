@@ -14,6 +14,12 @@ struct remove_const
 };
 
 template < typename T >
+struct remove_const <const T >
+{
+	using type = T;
+};
+
+template < typename T >
 struct remove_const < const T & >
 {
 	using type = T;
@@ -24,3 +30,10 @@ struct remove_const < const T && >
 {
 	using type = T;
 };
+
+
+template < typename T >
+using add_const_t = typename add_const < T > ::value;
+
+template < typename T >
+using remove_const_t = typename remove_const < T > ::value;
