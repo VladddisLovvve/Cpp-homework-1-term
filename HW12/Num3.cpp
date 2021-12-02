@@ -3,7 +3,7 @@
 constexpr double E(unsigned s) // s - относительная погрешность измерения s в процентах
 {
 	double ans = 0; 
-	int k = 1; int j = 0;
+	unsigned k = 1, j = 0;
 	while (100 / k > s)
 	{ ans += 1.0 / k; j++; k *= j; }
 	return ans;
