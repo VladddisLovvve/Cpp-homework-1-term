@@ -92,7 +92,7 @@ using remove_reference_t = typename remove_reference < T > ::type;
 template < typename T >
 struct add_pointer
 {
-    using type = T&;
+    using type = T*;
 };
 
 template < typename T >
@@ -134,3 +134,4 @@ public:
     using type = if_then_else_t < is_array_v < T2 >, remove_extent_t < T2 >, if_then_else_t
         < is_function_v < T2 >, add_pointer < T2 >, remove_extent_t < T2 > > >;
 };
+using decay_t = typename decay < T > ::type
