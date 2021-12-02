@@ -25,7 +25,8 @@ inline constexpr bool is_function_v = is_function < RT > ::value;
 
 //is_array
 template < typename T >
-struct is_array : std::false_type {};
+struct is_array : std::false_type
+{};
 
 template < typename T, std::size_t N >
 struct is_array < T[N] > : std::true_type
@@ -92,7 +93,7 @@ using remove_reference_t = typename remove_reference < T > ::type;
 template < typename T >
 struct add_pointer
 {
-    using type = T*;
+    using type = T&;
 };
 
 template < typename T >
@@ -124,14 +125,43 @@ using remove_extent_t = typename remove_extent < T > ::type;
 
 
 
+//remove_const
+template < typename T >
+struct remove_const
+{
+    using type = T;
+};
+
+template < typename T >
+struct remove_const <const T >
+{
+    using type = T;
+};
+
+template < typename T >
+struct remove_const < const T& >
+{
+    using type = T;
+};
+
+template < typename T >
+struct remove_const < const T&& >
+{
+    using type = T;
+};
+
+template < typename T >
+using remove_const_t = typename remove_const < T > ::type
+
+
+
 //наконец, decay
-template< typename T1 >
+template < typename T1 >
 struct decay
 {
 private:
     using T2 = remove_reference_t < T1 >;
 public:
     using type = if_then_else_t < is_array_v < T2 >, remove_extent_t < T2 >, if_then_else_t
-        < is_function_v < T2 >, add_pointer < T2 >, remove_extent_t < T2 > > >;
+        < is_function_v < T2 >, add_pointer_t < T2 >, remove_const_t < T2 > > >;
 };
-using decay_t = typename decay < T > ::type
