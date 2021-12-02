@@ -22,7 +22,7 @@ struct binomial_coeficcient < n, n > // C из n по n = 1
 };
 
 template < int n, int k >
-using C = int binomial_coeficcient < n, k > ::ans;
+static const int C = binomial_coeficcient < n, k > ::ans;
 
 int main()
 {
