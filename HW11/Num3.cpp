@@ -97,7 +97,7 @@ struct add_pointer
 };
 
 template < typename T >
-using add_pointer_t = typename add_poiner < T > ::type;
+using add_pointer_t = typename add_pointer < T > ::type;
 
 
 
